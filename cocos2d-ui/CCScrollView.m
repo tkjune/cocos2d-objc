@@ -765,13 +765,10 @@
 {
     // Add recognizers to view
     UIView* view = [CCDirector sharedDirector].view;
-    
-    NSMutableArray* recognizers = [view.gestureRecognizers mutableCopy];
-    if (!recognizers) recognizers = [NSMutableArray arrayWithCapacity:2];
-    [recognizers insertObject:_panRecognizer atIndex:0];
-    [recognizers insertObject:_tapRecognizer atIndex:0];
-    
-    view.gestureRecognizers = recognizers;
+
+    [view addGestureRecognizer:_panRecognizer];
+    [view addGestureRecognizer:_tapRecognizer];
+
     [super onEnterTransitionDidFinish];
 }
 
@@ -780,11 +777,8 @@
     // Remove recognizers from view
     UIView* view = [CCDirector sharedDirector].view;
     
-    NSMutableArray* recognizers = [view.gestureRecognizers mutableCopy];
-    [recognizers removeObject:_panRecognizer];
-    [recognizers removeObject:_tapRecognizer];
-    
-    view.gestureRecognizers = recognizers;
+    [view removeGestureRecognizer:_panRecognizer];
+    [view removeGestureRecognizer:_tapRecognizer];
     
     [super onExitTransitionDidStart];
 }
